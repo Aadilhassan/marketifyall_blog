@@ -7,38 +7,67 @@ export interface Props {
   title: string
   description: string
   permalink: string
+  image?: string
+  article?: boolean
+  publishDate?: string
+  author?: string
 }
 
-const { title, description, permalink } = Astro.props
-const socialUrl = Astro.site.href + 'assets/social.png'
+const { 
+  title, 
+  description, 
+  permalink,
+  image,
+  article = false,
+  publishDate,
+  author = "Aadil Hassan, CEO Marketifyall"
+} = Astro.props
+
+const socialUrl = image ? Astro.site.href + image.replace(/^\//, '') : Astro.site.href + 'assets/social.png'
 const siteName = 'Marketifyall - AI Marketing Automation'
+const canonicalURL = new URL(permalink, Astro.site);
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
+<title>{title} | Marketifyall</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content={author} />
+{publishDate && <meta name="date" content={publishDate} />}
+
+<!-- Sitemap, RSS & robots -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title="Marketifyall Blog RSS Feed" href="/rss.xml" />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={permalink} />
+<meta property="og:type" content={article ? "article" : "website"} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialUrl} />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+{article && (
+  <>
+    <meta property="article:author" content={author} />
+    {publishDate && <meta property="article:published_time" content={new Date(publishDate).toISOString()} />}
+  </>
+)}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={permalink} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialUrl} />
 <meta property="twitter:site" content="@marketifyall" />
+<meta property="twitter:creator" content="@marketifyall" />
 
 <ClientRouter />
 

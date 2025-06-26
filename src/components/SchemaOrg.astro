@@ -1,0 +1,78 @@
+---
+export interface Props {
+  type?: 'website' | 'article' | 'blogPosting';
+  post?: {
+    title: string;
+    description: string;
+    publishDate: string;
+    updatedDate?: string;
+    image?: string;
+    author?: string;
+  };
+  siteUrl?: string;
+  siteName?: string;
+}
+
+const { 
+  type = 'website',
+  post,
+  siteUrl = Astro.site?.toString() || 'https://marketifyall.com',
+  siteName = 'Marketifyall - AI Marketing Automation'
+} = Astro.props;
+
+const getJSONLD = () => {
+  if (type === 'website') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      'name': siteName,
+      'url': siteUrl,
+      'potentialAction': {
+        '@type': 'SearchAction',
+        'target': `${siteUrl}/search?q={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    };
+  }
+
+  if ((type === 'article' || type === 'blogPosting') && post) {
+    const articleSchema = {
+      '@context': 'https://schema.org',
+      '@type': type === 'article' ? 'Article' : 'BlogPosting',
+      'mainEntityOfPage': {
+        '@type': 'WebPage',
+        '@id': `${siteUrl}/blog/${post.title.toLowerCase().replace(/\s+/g, '-')}/`
+      },
+      'headline': post.title,
+      'description': post.description,
+      'image': post.image ? `${siteUrl}${post.image.startsWith('/') ? post.image.substring(1) : post.image}` : `${siteUrl}assets/social.png`,
+      'datePublished': new Date(post.publishDate).toISOString(),
+      'dateModified': post.updatedDate ? new Date(post.updatedDate).toISOString() : new Date(post.publishDate).toISOString(),
+      'author': {
+        '@type': 'Person',
+        'name': post.author || 'Aadil Hassan',
+        'url': `${siteUrl}/about/`
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': siteName,
+        'logo': {
+          '@type': 'ImageObject',
+          'url': `${siteUrl}assets/logo.webp`,
+          'width': '60',
+          'height': '60'
+        }
+      }
+    };
+
+    return articleSchema;
+  }
+
+  return {};
+};
+
+const jsonLD = getJSONLD();
+---
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />

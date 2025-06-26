@@ -19,7 +19,17 @@ const permalink = `${Astro.site.href}blog/${slug}`;
 const { Content } = await render(post)
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout 
+  title={title} 
+  description={description} 
+  permalink={permalink} 
+  current="blog" 
+  article={true}
+  publishDate={typeof publishDate === 'string' ? publishDate : publishDate.toISOString()}
+  author="Aadil Hassan, CEO Marketifyall"
+  image="/assets/blog/casual-life-3d-workspace.webp"
+  post={post.data}
+>
   <header>
     <p>{publishDate} ~ {readingTimeEstimate}</p>
     <h1>{title}</h1>

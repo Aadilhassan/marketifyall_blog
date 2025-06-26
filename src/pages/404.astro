@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '404: Page Not Found';
+const description = 'The page you were looking for doesn\'t exist.';
+const permalink = Astro.site ? `${Astro.site.href}404` : 'https://marketifyall.com/404';
+---
+
+<BaseLayout title={title} description={description} permalink={permalink}>
+  <div class="container">
+    <div class="error-container">
+      <h1>404</h1>
+      <h2>Page Not Found</h2>
+      <p>The page you were looking for doesn't exist or has been moved.</p>
+      <a href="/" class="btn">Return to Homepage</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-container {
+    text-align: center;
+    padding: 5rem 0;
+  }
+
+  h1 {
+    font-size: 8rem;
+    margin-bottom: 0;
+    color: var(--primary-color);
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: var(--primary-color-dark);
+  }
+</style>

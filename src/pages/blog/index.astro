@@ -3,14 +3,20 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'Marketifyall Blog - Marketing Automation Insights';
-const description = 'Latest articles and insights about social media automation, marketing strategies, and AI for startups.';
-const permalink = `${Astro.site.href}blog`;
+const description = 'Latest articles and insights about social media automation, marketing strategies, and AI for startups from Marketifyall.';
+const permalink = Astro.site ? `${Astro.site.href}blog` : 'https://marketifyall.com/blog';
 
 let allPosts = await getCollection('posts')
 allPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout 
+  title={title} 
+  description={description} 
+  permalink={permalink} 
+  current="blog" 
+  image="/assets/social.png"
+>
   <div class="container">
     <h1>Marketing Insights & Tips</h1>
     <p class="blog-intro">Learn about the latest trends in social media marketing, automation strategies, and how AI can transform your startup's marketing efforts.</p>
