@@ -1,0 +1,1687 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('docs');
+
+// Group docs by category
+const docsByCategory = docs.reduce((acc, doc) => {
+  const category = doc.data.category;
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(doc);
+  return acc;
+}, {});
+
+// Sort docs within each category by order
+Object.keys(docsByCategory).forEach(category => {
+  docsByCategory[category].sort((a, b) => a.data.order - b.data.order);
+});
+
+// Get featured docs
+const featuredDocs = docs.filter(doc => doc.data.featured);
+
+const categoryOrder = ['getting-started', 'content', 'analytics', 'automation', 'collaboration', 'development', 'help'];
+const categoryLabels = {
+  'getting-started': 'Getting Started',
+  'content': 'Content Management',
+  'analytics': 'Analytics & Reporting',
+  'automation': 'Automation',
+  'collaboration': 'Team & Collaboration',
+  'development': 'Developers',
+  'help': 'Help & Support'
+};
+---
+
+<BaseLayout 
+  title="Documentation - Marketifyall"
+  description="Comprehensive documentation for Marketifyall social media automation platform. Get started quickly with guides, tutorials, and API reference."
+  current="docs"
+  permalink="/docs/"
+>
+  <main class="docs-page">
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="docs-hero">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Documentation
+          </div>
+          <h1>Everything you need to succeed</h1>
+          <p>Comprehensive guides, tutorials, and API reference to help you master social media automation with Marketifyall</p>
+          
+          <!-- Quick Actions -->
+          <div class="quick-actions">
+            <a href="/docs/getting-started" class="action-btn primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M5 12l5 5l10-10"/>
+              </svg>
+              Get Started
+            </a>
+            <a href="/docs/api" class="action-btn secondary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              API Reference
+            </a>
+            <a href="#video-tutorials" class="action-btn tertiary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+              Watch Tutorials
+            </a>
+          </div>
+        </div>
+        
+        <!-- Enhanced Search Bar -->
+        <div class="search-section">
+          <div class="search-container">
+            <div class="search-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input 
+                type="search" 
+                placeholder="Search documentation..." 
+                class="search-input"
+                id="docs-search"
+              />
+              <div class="search-shortcut">⌘K</div>
+            </div>
+            
+            <!-- Search Suggestions -->
+            <div class="search-suggestions" id="search-suggestions">
+              <div class="suggestion-group">
+                <div class="suggestion-title">Popular searches</div>
+                <a href="/docs/getting-started" class="suggestion-item">Getting started</a>
+                <a href="/docs/content-creation" class="suggestion-item">Content creation</a>
+                <a href="/docs/automation" class="suggestion-item">Automation rules</a>
+                <a href="/docs/api" class="suggestion-item">API documentation</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Filter -->
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="getting-started">Beginner</button>
+            <button class="filter-tab" data-filter="development">Developers</button>
+            <button class="filter-tab" data-filter="help">Support</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+          <nav class="docs-nav">
+            <h3>Quick Start</h3>
+            <ul>
+              <li><a href="/docs/getting-started">Getting Started</a></li>
+              <li><a href="/docs/content-creation">Content Creation</a></li>
+              <li><a href="/docs/analytics">Analytics</a></li>
+            </ul>
+
+            {categoryOrder.map(category => 
+              docsByCategory[category] && (
+                <div>
+                  <h3>{categoryLabels[category]}</h3>
+                  <ul>
+                    {docsByCategory[category].map(doc => (
+                      <li>
+                        <a href={`/docs/${doc.data.slug}`}>
+                          {doc.data.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )}
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="docs-content">
+          <!-- Stats Section -->
+          <section class="docs-stats">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number">{docs.length}</div>
+                <div class="stat-label">Documentation Pages</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">{Object.keys(docsByCategory).length}</div>
+                <div class="stat-label">Categories</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">5min</div>
+                <div class="stat-label">Average Read Time</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Editor's Choice -->
+          <section class="editors-choice">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polygon points="12,2 15.09,8.26 22,9 17,14.74 18.18,21.02 12,17.77 5.82,21.02 7,14.74 2,9 8.91,8.26"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Editor's Choice</h2>
+                <p>Hand-picked guides to get you started quickly and efficiently</p>
+              </div>
+            </div>
+            
+            <div class="featured-grid">
+              {featuredDocs.map((doc, index) => (
+                <article class="featured-card" data-aos="fade-up" data-aos-delay={index * 100}>
+                  <div class="card-header">
+                    <div class="card-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                      </svg>
+                    </div>
+                    <div class="card-badges">
+                      <span class="feature-badge">Featured</span>
+                      <span class="category">{categoryLabels[doc.data.category]}</span>
+                    </div>
+                  </div>
+                  <h3>
+                    <a href={`/docs/${doc.data.slug}`}>{doc.data.title}</a>
+                  </h3>
+                  <p>{doc.data.description}</p>
+                  <div class="card-footer">
+                    <div class="card-meta">
+                      <span class="updated">Updated {new Date(doc.data.lastUpdated).toLocaleDateString()}</span>
+                      <span class="read-time">5 min read</span>
+                    </div>
+                    <a href={`/docs/${doc.data.slug}`} class="read-more">
+                      Read guide
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <!-- All Categories -->
+          <section class="all-docs">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>
+                  <path d="M8 21v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Complete Documentation</h2>
+                <p>Explore all our documentation organized by category</p>
+              </div>
+            </div>
+            
+            {categoryOrder.map((category, categoryIndex) => 
+              docsByCategory[category] && (
+                <div class="category-section" data-aos="fade-up" data-aos-delay={categoryIndex * 100}>
+                  <div class="category-header">
+                    <div class="category-icon">
+                      {category === 'getting-started' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M5 12l5 5l10-10"/>
+                        </svg>
+                      )}
+                      {category === 'content' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                        </svg>
+                      )}
+                      {category === 'analytics' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M3 3v18h18"/>
+                          <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                        </svg>
+                      )}
+                      {category === 'automation' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                        </svg>
+                      )}
+                      {category === 'collaboration' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                          <circle cx="9" cy="7" r="4"/>
+                          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                      )}
+                      {category === 'development' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M16 18l6-6-6-6"/>
+                          <path d="M8 6l-6 6 6 6"/>
+                        </svg>
+                      )}
+                      {category === 'help' && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                          <path d="M12 17h.01"/>
+                        </svg>
+                      )}
+                    </div>
+                    <div>
+                      <h3>{categoryLabels[category]}</h3>
+                      <p class="category-description">
+                        {category === 'getting-started' && 'Start your journey with Marketifyall'}
+                        {category === 'content' && 'Create and manage compelling content'}
+                        {category === 'analytics' && 'Track and analyze your performance'}
+                        {category === 'automation' && 'Automate your social media workflow'}
+                        {category === 'collaboration' && 'Work effectively with your team'}
+                        {category === 'development' && 'Build with our powerful API'}
+                        {category === 'help' && 'Get support when you need it'}
+                      </p>
+                    </div>
+                    <div class="category-stats">
+                      <span class="doc-count">{docsByCategory[category].length} guides</span>
+                    </div>
+                  </div>
+                  <div class="docs-grid">
+                    {docsByCategory[category].map((doc, docIndex) => (
+                      <article class="doc-card" data-aos="fade-up" data-aos-delay={(categoryIndex * 100) + (docIndex * 50)}>
+                        <div class="card-header-mini">
+                          <div class="difficulty-badge">
+                            {category === 'getting-started' ? 'Beginner' : 
+                             category === 'development' ? 'Advanced' : 'Intermediate'}
+                          </div>
+                        </div>
+                        <h4>
+                          <a href={`/docs/${doc.data.slug}`}>{doc.data.title}</a>
+                        </h4>
+                        <p>{doc.data.description}</p>
+                        <div class="card-footer-mini">
+                          <div class="card-meta">
+                            <span class="updated">Updated {new Date(doc.data.lastUpdated).toLocaleDateString()}</span>
+                            <span class="read-time">5 min</span>
+                          </div>
+                          <a href={`/docs/${doc.data.slug}`} class="card-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                          </a>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
+          </section>
+
+          <!-- Additional Resources -->
+          <section class="resources-section" id="video-tutorials">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M4 11a9 9 0 0 1 9 9"/>
+                  <path d="M4 4a16 16 0 0 1 16 16"/>
+                  <circle cx="5" cy="19" r="1"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Additional Resources</h2>
+                <p>More ways to learn and get the most out of Marketifyall</p>
+              </div>
+            </div>
+
+            <div class="resources-grid">
+              <div class="resource-card">
+                <div class="resource-icon video">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polygon points="5,3 19,12 5,21"/>
+                  </svg>
+                </div>
+                <h3>Video Tutorials</h3>
+                <p>Step-by-step video guides covering all major features and workflows.</p>
+                <a href="#" class="resource-link">Watch Videos</a>
+              </div>
+
+              <div class="resource-card">
+                <div class="resource-icon webinar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
+                    <path d="M8.5 8.5l-.9-.9"/>
+                  </svg>
+                </div>
+                <h3>Live Webinars</h3>
+                <p>Join our weekly live sessions to learn best practices and ask questions.</p>
+                <a href="#" class="resource-link">Register Now</a>
+              </div>
+
+              <div class="resource-card">
+                <div class="resource-icon templates">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                    <polyline points="14,2 14,8 20,8"/>
+                  </svg>
+                </div>
+                <h3>Templates & Examples</h3>
+                <p>Ready-to-use templates and real-world examples to jumpstart your campaigns.</p>
+                <a href="#" class="resource-link">Browse Templates</a>
+              </div>
+
+              <div class="resource-card">
+                <div class="resource-icon community">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <h3>Community Forum</h3>
+                <p>Connect with other users, share tips, and get help from the community.</p>
+                <a href="#" class="resource-link">Join Community</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Enhanced Help Section -->
+          <section class="help-section">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386L9.663 17z"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Need Help?</h2>
+                <p>Multiple ways to get the support you need</p>
+              </div>
+            </div>
+            
+            <div class="help-grid">
+              <div class="help-card priority">
+                <div class="help-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <h3>Live Chat Support</h3>
+                <p>Get instant help from our support team. Available 24/7 for all users.</p>
+                <div class="help-features">
+                  <span class="feature">✓ Instant responses</span>
+                  <span class="feature">✓ Screen sharing</span>
+                  <span class="feature">✓ 24/7 availability</span>
+                </div>
+                <a href="#" class="help-link primary">Start Chat</a>
+              </div>
+              
+              <div class="help-card">
+                <div class="help-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <h3>Email Support</h3>
+                <p>Send us detailed questions and get comprehensive answers from our experts.</p>
+                <div class="help-features">
+                  <span class="feature">✓ Detailed responses</span>
+                  <span class="feature">✓ 2-4 hour response time</span>
+                  <span class="feature">✓ Technical support</span>
+                </div>
+                <a href="mailto:support@marketifyall.com" class="help-link">Email Us</a>
+              </div>
+              
+              <div class="help-card">
+                <div class="help-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <h3>Knowledge Base</h3>
+                <p>Search our comprehensive knowledge base for answers to common questions.</p>
+                <div class="help-features">
+                  <span class="feature">✓ 500+ articles</span>
+                  <span class="feature">✓ Step-by-step guides</span>
+                  <span class="feature">✓ Video tutorials</span>
+                </div>
+                <a href="/docs/faq" class="help-link">Browse FAQ</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Enhanced Hero Section */
+  .docs-hero {
+    text-align: center;
+    padding: 4rem 0 6rem;
+    background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .docs-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .hero-badge svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .docs-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .docs-hero p {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .quick-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .action-btn:hover::before {
+    opacity: 1;
+  }
+
+  .action-btn.primary {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  }
+
+  .action-btn.secondary {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+  }
+
+  .action-btn.secondary:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .action-btn.tertiary {
+    background: transparent;
+    color: var(--color-text-light);
+    border: 2px solid var(--color-border);
+  }
+
+  .action-btn.tertiary:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .action-btn svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* Enhanced Search Section */
+  .search-section {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .search-container {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .search-wrapper {
+    position: relative;
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .search-wrapper:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  }
+
+  .search-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-text-light);
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--color-text);
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-light);
+  }
+
+  .search-shortcut {
+    background: var(--color-border);
+    color: var(--color-text-light);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    display: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .suggestion-group {
+    margin-bottom: 1rem;
+  }
+
+  .suggestion-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .suggestion-item {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .suggestion-item:hover {
+    background: var(--color-bg);
+  }
+
+  .filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-bg-secondary);
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .filter-tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--color-text-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .filter-tab:hover,
+  .filter-tab.active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* Layout */
+  .docs-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    align-items: start;
+  }
+
+  .docs-sidebar {
+    position: sticky;
+    top: 2rem;
+    background: var(--color-bg-secondary);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(10px);
+  }
+
+  .docs-nav h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-light);
+    margin: 2rem 0 0.75rem 0;
+  }
+
+  .docs-nav h3:first-child {
+    margin-top: 0;
+  }
+
+  .docs-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .docs-nav li {
+    margin-bottom: 0.5rem;
+  }
+
+  .docs-nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .docs-nav a:hover {
+    background: var(--color-bg);
+    color: var(--color-primary);
+  }
+
+  .docs-content {
+    max-width: none;
+  }
+
+  /* Stats Section */
+  .docs-stats {
+    margin-bottom: 4rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  /* Section Headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-icon {
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .section-header p {
+    color: var(--color-text-light);
+    margin: 0.5rem 0 0 0;
+  }
+
+  /* Featured Cards */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .featured-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+  }
+
+  .featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon {
+    background: var(--color-primary);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .card-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .feature-badge {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .category {
+    background: var(--color-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  .featured-card h3 {
+    margin-bottom: 1rem;
+  }
+
+  .featured-card h3 a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .featured-card h3 a:hover {
+    color: var(--color-primary);
+  }
+
+  .featured-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+  }
+
+  .read-more:hover {
+    transform: translateX(4px);
+  }
+
+  .read-more svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Category Sections */
+  .category-section {
+    margin-bottom: 4rem;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+  }
+
+  .category-icon {
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .category-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .category-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .category-description {
+    color: var(--color-text-light);
+    margin: 0.5rem 0 0 0;
+  }
+
+  .category-stats {
+    margin-left: auto;
+    background: var(--color-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .doc-count {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .doc-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .doc-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .difficulty-badge {
+    background: var(--color-bg);
+    color: var(--color-text-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+  }
+
+  .doc-card h4 {
+    margin-bottom: 1rem;
+  }
+
+  .doc-card h4 a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .doc-card h4 a:hover {
+    color: var(--color-primary);
+  }
+
+  .doc-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .card-footer-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-link {
+    color: var(--color-primary);
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .card-link:hover {
+    background: var(--color-bg);
+  }
+
+  .card-link svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Resources Section */
+  .resources-section {
+    margin-bottom: 4rem;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .resource-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .resource-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .resource-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+  }
+
+  .resource-icon.video {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+  }
+
+  .resource-icon.webinar {
+    background: linear-gradient(135deg, #10b981, #059669);
+  }
+
+  .resource-icon.templates {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  }
+
+  .resource-icon.community {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+  }
+
+  .resource-icon svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .resource-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .resource-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .resource-link {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .resource-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* Enhanced Help Section */
+  .help-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .help-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .help-card.priority {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .help-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .help-icon {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .help-card:not(.priority) .help-icon {
+    background: var(--color-bg);
+    color: var(--color-primary);
+  }
+
+  .help-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .help-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: inherit;
+  }
+
+  .help-card p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .help-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  .help-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .help-link.primary {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .help-link.primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .help-card:not(.priority) .help-link {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .help-card:not(.priority) .help-link:hover {
+    background: var(--color-primary-dark);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .docs-layout {
+      grid-template-columns: 240px 1fr;
+      gap: 2rem;
+    }
+
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 1rem;
+    }
+
+    .docs-layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .docs-sidebar {
+      position: static;
+      margin-bottom: 2rem;
+    }
+
+    .docs-hero {
+      padding: 2rem 0 4rem;
+    }
+
+    .docs-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .quick-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .action-btn {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+
+    .search-wrapper {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: stretch;
+    }
+
+    .search-shortcut {
+      align-self: flex-end;
+    }
+
+    .filter-tabs {
+      flex-wrap: wrap;
+    }
+
+    .section-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .category-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .docs-grid,
+    .resources-grid,
+    .help-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Enhanced search functionality with filters
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('docs-search') as HTMLInputElement;
+    const filterTabs = document.querySelectorAll('.filter-tab') as NodeListOf<HTMLButtonElement>;
+    const searchSuggestions = document.getElementById('search-suggestions') as HTMLElement;
+    let currentFilter = 'all';
+
+    // Search functionality
+    if (searchInput) {
+      // Show suggestions on focus
+      searchInput.addEventListener('focus', function() {
+        if (searchSuggestions && !searchInput.value) {
+          searchSuggestions.style.display = 'block';
+        }
+      });
+
+      // Hide suggestions on blur (with delay for clicking)
+      searchInput.addEventListener('blur', function() {
+        setTimeout(() => {
+          if (searchSuggestions) {
+            searchSuggestions.style.display = 'none';
+          }
+        }, 200);
+      });
+
+      // Search as you type
+      searchInput.addEventListener('input', function(e) {
+        const target = e.target as HTMLInputElement;
+        const query = target.value.toLowerCase();
+        
+        // Hide suggestions when typing
+        if (searchSuggestions) {
+          searchSuggestions.style.display = query ? 'none' : 'block';
+        }
+
+        filterContent(query, currentFilter);
+      });
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.blur();
+        }
+      });
+    }
+
+    // Filter tabs functionality
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Update active tab
+        filterTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update current filter
+        currentFilter = this.dataset.filter || 'all';
+        
+        // Apply filter
+        filterContent(searchInput?.value.toLowerCase() || '', currentFilter);
+      });
+    });
+
+    // Filter content function
+    function filterContent(query: string, filter: string) {
+      const allCards = document.querySelectorAll('.doc-card, .featured-card') as NodeListOf<HTMLElement>;
+      const categorySections = document.querySelectorAll('.category-section') as NodeListOf<HTMLElement>;
+      
+      allCards.forEach(card => {
+        const title = card.querySelector('h3 a, h4 a')?.textContent?.toLowerCase() || '';
+        const description = card.querySelector('p')?.textContent?.toLowerCase() || '';
+        const category = card.closest('.category-section')?.querySelector('h3')?.textContent?.toLowerCase() || '';
+        
+        // Check search query match
+        const matchesQuery = !query || title.includes(query) || description.includes(query);
+        
+        // Check filter match
+        let matchesFilter = filter === 'all';
+        if (!matchesFilter) {
+          const categoryData = card.closest('.category-section')?.dataset;
+          if (filter === 'getting-started') {
+            matchesFilter = category.includes('getting started');
+          } else if (filter === 'development') {
+            matchesFilter = category.includes('developers');
+          } else if (filter === 'help') {
+            matchesFilter = category.includes('help');
+          }
+        }
+        
+        // Show/hide card
+        card.style.display = (matchesQuery && matchesFilter) ? 'block' : 'none';
+      });
+
+      // Hide empty category sections
+      categorySections.forEach(section => {
+        const visibleCards = section.querySelectorAll('.doc-card:not([style*="display: none"])');
+        section.style.display = visibleCards.length > 0 ? 'block' : 'none';
+      });
+    }
+
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('[data-aos]') as NodeListOf<HTMLElement>;
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href') || '');
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add loading states for external links
+    document.querySelectorAll('a[href^="http"], a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('click', function() {
+        this.style.opacity = '0.7';
+        this.style.pointerEvents = 'none';
+        
+        setTimeout(() => {
+          this.style.opacity = '1';
+          this.style.pointerEvents = 'auto';
+        }, 1000);
+      });
+    });
+
+    // Progressive enhancement for search suggestions
+    const suggestionItems = document.querySelectorAll('.suggestion-item');
+    suggestionItems.forEach(item => {
+      item.addEventListener('click', function() {
+        if (searchInput) {
+          searchInput.value = this.textContent || '';
+          searchInput.focus();
+          filterContent(searchInput.value.toLowerCase(), currentFilter);
+        }
+      });
+    });
+
+    // Add tooltips to action buttons
+    const actionBtns = document.querySelectorAll('.action-btn');
+    actionBtns.forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        // Add subtle animation feedback
+        this.style.transform = 'translateY(-2px) scale(1.02)';
+      });
+      
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Initialize theme-aware particles background (optional enhancement)
+    const hero = document.querySelector('.docs-hero');
+    if (hero && window.innerWidth > 768) {
+      createParticles(hero);
+    }
+
+    function createParticles(container: Element) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      canvas.style.position = 'absolute';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.opacity = '0.1';
+      container.appendChild(canvas);
+
+      function resize() {
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+
+      const particles: any[] = [];
+      const particleCount = 20;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+          
+          if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+          
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
+          ctx.fill();
+        });
+        
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+  });
+</script>
+---
