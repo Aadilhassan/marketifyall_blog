@@ -411,7 +411,7 @@ if (currentIndex < flatDocs.length - 1) {
   }
 
   .category-badge {
-    background: var(--color-primary);
+    background: linear-gradient(135deg, #474c99, #0b154b);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -880,6 +880,13 @@ if (currentIndex < flatDocs.length - 1) {
 </style>
 
 <script>
+  // Declare gtag as global to avoid TypeScript errors
+  declare global {
+    interface Window {
+      gtag: (...args: any[]) => void;
+    }
+  }
+
   // Enhanced documentation page functionality
   document.addEventListener('DOMContentLoaded', function() {
     // Generate enhanced table of contents
@@ -953,10 +960,10 @@ if (currentIndex < flatDocs.length - 1) {
     if (progressBar && docBody) {
       function updateProgress() {
         const docRect = docBody.getBoundingClientRect();
-        const docHeight = docBody.offsetHeight;
+        const docHeight = (docBody as HTMLElement).offsetHeight;
         const windowHeight = window.innerHeight;
         const scrollTop = window.pageYOffset;
-        const docTop = docBody.offsetTop;
+        const docTop = (docBody as HTMLElement).offsetTop;
         
         const totalScrollableDistance = docHeight - windowHeight;
         const currentScrollDistance = scrollTop - docTop;
@@ -995,8 +1002,8 @@ if (currentIndex < flatDocs.length - 1) {
         // Disable other button
         feedbackButtons.forEach(btn => {
           if (btn !== this) {
-            btn.style.opacity = '0.5';
-            btn.style.pointerEvents = 'none';
+            (btn as HTMLElement).style.opacity = '0.5';
+            (btn as HTMLElement).style.pointerEvents = 'none';
           }
         });
         
@@ -1015,8 +1022,8 @@ if (currentIndex < flatDocs.length - 1) {
         }, 500);
         
         // Analytics (you would implement this based on your analytics solution)
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'documentation_feedback', {
+        if (typeof window.gtag !== 'undefined') {
+          window.gtag('event', 'documentation_feedback', {
             'page_title': document.title,
             'feedback_type': feedback,
             'page_location': window.location.href
