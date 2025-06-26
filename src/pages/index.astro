@@ -1,22 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'My Astro Blog';
-const description = 'The perfect starter for your perfect blog.';
+const title = 'Marketifyall - Social Media Automation Platform';
+const description = 'AI-powered social media automation platform for startups to manage their entire marketing ecosystem.';
 const permalink = Astro.site.href;
 ---
 
 <BaseLayout title={title} description={description} permalink={permalink}>
   <div class="home-container">
     <div class="home-copy">
-      <h1>Welcome to your new Astro Blog</h1>
-      <p>Check out the docs on <a href="https://www.github.com/Charca/astro-blog-template" target="_blank" rel="noopener">GitHub</a> to get started.</p>
+      <h1>Automate Your Marketing with AI</h1>
+      <p>Marketifyall helps startups scale their marketing efforts efficiently with an all-in-one collaborative platform.</p>
+      <div class="cta-buttons">
+        <a href="/features" class="cta-button primary">Explore Features</a>
+        <a href="/blog" class="cta-button secondary">Read Our Blog</a>
+      </div>
     </div>
 
     <div class="hero-image-container">
       <picture>
         <source srcset="/assets/home-illustration.webp" media="(min-width: 600px)">
-        <img class="hero-image" alt="Illustration of person reading a book" src="/assets/home-illustration-small.webp" width="550" height="466">
+        <img class="hero-image" alt="Marketing automation illustration" src="/assets/home-illustration-small.webp" width="550" height="466">
       </picture>
       <p class="caption">
         Illustration by
@@ -27,6 +31,122 @@ const permalink = Astro.site.href;
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .home-container {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 2em 0;
+    min-height: 400px;
+  }
+
+  .home-copy {
+    flex: 1;
+    padding: 0 1em;
+  }
+
+  .home-copy h1 {
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+  }
+
+  .home-copy p {
+    font-size: 1.4em;
+    margin-bottom: 1.5em;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.7em 1.5em;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: all 0.2s ease;
+  }
+
+  .primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .primary:hover {
+    background-color: var(--primary-color-dark);
+  }
+
+  .secondary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  .secondary:hover {
+    background-color: var(--primary-color-light);
+  }
+
+  .hero-image-container {
+    margin: 0 1em;
+    text-align: center;
+  }
+
+  .hero-image-container picture {
+    display: block;
+    min-height: 250px;
+  }
+
+  .caption {
+    font-size: .8em;
+    font-style: italic;
+    text-align: left;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 550px;
+    margin-bottom: 1em;
+  }
+
+  @media (max-width: 1200px) {
+    p {
+      font-size: 1.2em;
+    }
+
+    .hero-image {
+      max-width: 400px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .home-container {
+      flex-direction: column;
+    }
+
+    .home-copy {
+      flex: 0;
+      padding-bottom: 2em;
+      text-align: center;
+    }
+
+    .cta-buttons {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
 
 <style>
   .home-container {

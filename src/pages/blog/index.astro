@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Blog';
-const description = 'Latest articles.';
+const title = 'Marketifyall Blog - Marketing Automation Insights';
+const description = 'Latest articles and insights about social media automation, marketing strategies, and AI for startups.';
 const permalink = `${Astro.site.href}blog`;
 
 let allPosts = await getCollection('posts')
@@ -12,7 +12,8 @@ allPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new 
 
 <BaseLayout title={title} description={description} permalink={permalink} current="blog">
   <div class="container">
-    <h1>Blog</h1>
+    <h1>Marketing Insights & Tips</h1>
+    <p class="blog-intro">Learn about the latest trends in social media marketing, automation strategies, and how AI can transform your startup's marketing efforts.</p>
     {allPosts.map((post, index) => {
       const href = `/blog/${post.data.slug}`;
       return (
@@ -45,6 +46,13 @@ allPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new 
     text-align: left;
     text-transform: uppercase;
     margin-right: 16px;
+  }
+  
+  .blog-intro {
+    color: var(--text-secondary);
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    max-width: 100%; /* Expanded to full width */
   }
 
   hr {

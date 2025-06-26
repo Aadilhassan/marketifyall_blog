@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Features | Marketifyall';
+const description = 'Discover the powerful features of Marketifyall - the AI-powered social media automation platform for startups.';
+const permalink = `${Astro.site.href}features`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink} current="features">
+  <div class="container">
+    <h1>Marketifyall Features</h1>
+    
+    <section class="feature-section">
+      <h2>Social Media Automation</h2>
+      <div class="feature-content">
+        <div class="feature-text">
+          <p>Streamline your social media presence across multiple platforms with our comprehensive automation tools.</p>
+          
+          <h3>Platforms Supported:</h3>
+          <ul class="platforms-list">
+            <li>Facebook Pages & Groups</li>
+            <li>Instagram (Posts, Stories, Reels)</li>
+            <li>X (Twitter)</li>
+            <li>Pinterest</li>
+            <li>YouTube</li>
+            <li>Reddit</li>
+            <li>TikTok</li>
+            <li>Threads</li>
+            <li>And more!</li>
+          </ul>
+          
+          <h3>Capabilities:</h3>
+          <ul>
+            <li><strong>Multi-platform content scheduling</strong> - Plan and schedule content for all your platforms in one place</li>
+            <li><strong>AI-powered content generation</strong> - Let AI create engaging posts tailored to each platform</li>
+            <li><strong>Auto-posting with platform-specific optimization</strong> - Posts are automatically formatted for best results</li>
+            <li><strong>Cross-platform content adaptation</strong> - Repurpose content across platforms efficiently</li>
+            <li><strong>Best time to post recommendations</strong> - AI analyzes optimal posting times for maximum engagement</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/assets/blog/casual-life-3d-girl-boy-poses.webp" alt="Social Media Automation" />
+        </div>
+      </div>
+    </section>
+    
+    <section class="feature-section">
+      <h2>Ads Management</h2>
+      <div class="feature-content reverse">
+        <div class="feature-text">
+          <p>Take control of your advertising campaigns with integrated ad management across major platforms.</p>
+          
+          <h3>Platforms:</h3>
+          <ul>
+            <li>Meta Ads (Facebook & Instagram)</li>
+            <li>Google Ads (Search, Display, YouTube)</li>
+          </ul>
+          
+          <h3>Features:</h3>
+          <ul>
+            <li><strong>Campaign creation and management</strong> - Create, monitor, and optimize campaigns from one dashboard</li>
+            <li><strong>AI-powered ad copy generation</strong> - Generate compelling ad copy with AI assistance</li>
+            <li><strong>Audience targeting optimization</strong> - Reach the right audience with smart targeting suggestions</li>
+            <li><strong>Budget allocation recommendations</strong> - Optimize spending based on performance data</li>
+            <li><strong>Performance tracking and ROI analysis</strong> - Comprehensive analytics to measure campaign success</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/assets/blog/casual-life-3d-likes.webp" alt="Ads Management" />
+        </div>
+      </div>
+    </section>
+    
+    <section class="feature-section">
+      <h2>Customer Engagement & Communication</h2>
+      <div class="feature-content">
+        <div class="feature-text">
+          <p>Build stronger relationships with your audience through intelligent engagement tools.</p>
+          
+          <h3>Channels:</h3>
+          <ul>
+            <li>Social media comments and DMs</li>
+            <li>Website chatbots</li>
+            <li>SMS campaigns</li>
+            <li>Email marketing</li>
+            <li>WhatsApp Business API</li>
+          </ul>
+          
+          <h3>AI Capabilities:</h3>
+          <ul>
+            <li><strong>Intelligent response suggestions</strong> - AI helps craft appropriate responses quickly</li>
+            <li><strong>Sentiment analysis</strong> - Understand customer emotions and respond accordingly</li>
+            <li><strong>Lead qualification</strong> - Automatically identify and prioritize promising leads</li>
+            <li><strong>Automated follow-ups</strong> - Never miss an opportunity with scheduled follow-ups</li>
+            <li><strong>Personalized message generation</strong> - Create customized messages at scale</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/assets/blog/casual-life-3d-workspace.webp" alt="Customer Engagement" />
+        </div>
+      </div>
+    </section>
+    
+    <section class="feature-section">
+      <h2>Competitor Analysis & SEO</h2>
+      <div class="feature-content reverse">
+        <div class="feature-text">
+          <p>Stay ahead of the competition with comprehensive market intelligence and SEO tools.</p>
+          
+          <h3>Features:</h3>
+          <ul>
+            <li><strong>Competitor social media monitoring</strong> - Track competitors' content and performance</li>
+            <li><strong>Content gap analysis</strong> - Identify opportunities your competitors are missing</li>
+            <li><strong>Keyword research and tracking</strong> - Find and monitor valuable keywords for your business</li>
+            <li><strong>SEO performance monitoring</strong> - Track your search engine rankings and visibility</li>
+            <li><strong>Trend identification</strong> - Spot emerging trends before your competitors</li>
+            <li><strong>Market sentiment analysis</strong> - Understand how customers feel about your industry</li>
+          </ul>
+        </div>
+        <div class="feature-image">
+          <img src="/assets/blog/casual-life-3d-meditation-crystal.webp" alt="Competitor Analysis" />
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 1.5em;
+  }
+  
+  .feature-section {
+    margin-bottom: 4em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .feature-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1em;
+  }
+  
+  .feature-content {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+  }
+  
+  .feature-content.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .feature-text {
+    flex: 3;
+  }
+  
+  .feature-image {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .feature-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  h3 {
+    margin-top: 1.2em;
+    margin-bottom: 0.7em;
+    color: var(--text-secondary);
+  }
+  
+  ul {
+    padding-left: 1.2em;
+    margin-bottom: 1.5em;
+  }
+  
+  li {
+    margin-bottom: 0.5em;
+  }
+  
+  .platforms-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+  }
+  
+  @media (max-width: 900px) {
+    .feature-content, .feature-content.reverse {
+      flex-direction: column;
+    }
+    
+    .feature-image {
+      order: -1;
+    }
+    
+    .platforms-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .platforms-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

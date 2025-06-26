@@ -11,6 +11,7 @@ export interface Props {
 
 const { title, description, permalink } = Astro.props
 const socialUrl = Astro.site.href + 'assets/social.png'
+const siteName = 'Marketifyall - AI Marketing Automation'
 ---
 
 <!-- Global Metadata -->
@@ -29,6 +30,7 @@ const socialUrl = Astro.site.href + 'assets/social.png'
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialUrl} />
+<meta property="og:site_name" content={siteName} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -36,6 +38,7 @@ const socialUrl = Astro.site.href + 'assets/social.png'
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialUrl} />
+<meta property="twitter:site" content="@marketifyall" />
 
 <ClientRouter />
 
