@@ -373,7 +373,7 @@ const categoryLabels = {
                 <a href="#" class="resource-link">Watch Videos</a>
               </div>
 
-              <div class="resource-card">
+              <!-- <div class="resource-card">
                 <div class="resource-icon webinar">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/>
@@ -383,7 +383,7 @@ const categoryLabels = {
                 <h3>Live Webinars</h3>
                 <p>Join our weekly live sessions to learn best practices and ask questions.</p>
                 <a href="#" class="resource-link">Register Now</a>
-              </div>
+              </div> -->
 
               <div class="resource-card">
                 <div class="resource-icon templates">
@@ -660,10 +660,13 @@ const categoryLabels = {
     gap: 1rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   .search-wrapper:focus-within {
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+
   }
 
   .search-icon {
@@ -675,11 +678,12 @@ const categoryLabels = {
 
   .search-input {
     flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 1rem;
-    color: var(--color-text);
-    outline: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--color-text, #111827);
+  font-family: inherit;
   }
 
   .search-input::placeholder {
@@ -1041,7 +1045,7 @@ const categoryLabels = {
 
   .category-title .section-icon {
     background: var(--color-primary);
-    color: white;
+    color: gray;
     padding: 1rem;
     border-radius: 12px;
     display: flex;
@@ -1182,6 +1186,7 @@ const categoryLabels = {
   }
 
   .category-icon::before {
+    color: gray;
     content: '';
     position: absolute;
     top: 0;
@@ -1194,10 +1199,23 @@ const categoryLabels = {
 
   .category-icon svg {
     width: 1.5rem;
-    height: 1.5rem;
-    position: relative;
-    z-index: 1;
+  height: 1.5rem;
+  position: relative;
+  z-index: 1;
+  stroke: currentColor;
+  color: var(--icon-color);
+  color: gray !important;
+  stroke: currentColor;
   }
+  
+body.light .category-icon svg {
+  color: #1f2937; 
+}
+
+
+body.dark .category-icon svg {
+  color: #f9fafb;
+}
 
   .category-text {
     flex: 1;
@@ -1256,10 +1274,9 @@ const categoryLabels = {
 
   .stats-badge:hover {
     background: var(--color-primary);
-    color: white;
+    color: black;
     border-color: var(--color-primary);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   }
 
   .stats-badge svg {
@@ -1468,18 +1485,20 @@ const categoryLabels = {
   }
 
   .help-card {
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: transform 0.3s ease;
+    background: var(--color-bg-secondary, #fff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
   }
-
+/* 
   .help-card.priority {
     background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
     color: white;
     border-color: var(--color-primary);
-  }
+  } */
 
   .help-card:hover {
     transform: translateY(-4px);
@@ -1492,7 +1511,7 @@ const categoryLabels = {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .help-card:not(.priority) .help-icon {
@@ -1506,23 +1525,24 @@ const categoryLabels = {
   }
 
   .help-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: inherit;
+    font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
   }
 
   .help-card p {
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
+    font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
   }
 
   .help-features {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
   }
 
   .feature {
