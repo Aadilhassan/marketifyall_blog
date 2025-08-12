@@ -1,0 +1,29 @@
+<script>
+  function initMenu() {
+    const toggleBtn = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+  
+    if (!toggleBtn || !navMenu) return;
+  
+    function closeMenu() {
+      navMenu.classList.remove("active");
+      toggleBtn.classList.remove("open");
+      toggleBtn.textContent = "☰";
+      document.body.style.overflow = "auto";
+    }
+  
+    toggleBtn.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("active");
+      toggleBtn.classList.toggle("open", isOpen);
+      toggleBtn.textContent = isOpen ? "✕" : "☰";
+      document.body.style.overflow = isOpen ? "hidden" : "auto";
+    });
+  
+    document.querySelectorAll("#nav-menu a").forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
+  }
+  
+  document.addEventListener("astro:page-load", initMenu);
+  </script>
+  
