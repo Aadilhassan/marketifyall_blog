@@ -1,7 +1,85 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Analytics';
+const description = 'Track KPIs, understand performance trends, and measure ROI with unified cross-platform analytics.';
+const permalink = '/features/analytics';
+const heroImage = '/assets/images/analytics.webp';
 ---
-<BaseLayout title="Analytics - Details">
-  <h1>Analytics</h1>
-  <p>More details about the Analytics feature will go here. Describe how users can track key metrics and analytics.</p>
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Analytics feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Actionable dashboards</h2>
+    <p>See what matters with customizable dashboards that highlight your goals, alerts, and recent changes.</p>
+
+    <h2>Attribution & reporting</h2>
+    <p>Connect content to outcomes with multi-touch attribution and export-ready reports your team can trust.</p>
+
+    <h2>Real-time performance monitoring</h2>
+    <p>
+      Track key metrics as they happen with live dashboards and instant alerts. Monitor engagement, reach,
+      conversions, and ROI across all your marketing channels in one unified view.
+    </p>
+
+    <h2>Advanced segmentation & insights</h2>
+    <p>
+      Deep dive into audience behavior with advanced segmentation tools. Identify high-value customer segments,
+      track customer journeys, and uncover actionable insights to optimize your marketing strategy.
+    </p>
+
+    <h2>Predictive analytics & forecasting</h2>
+    <p>
+      Use AI-powered predictive models to forecast campaign performance and identify trends before they peak.
+      Make data-driven decisions with confidence using advanced forecasting algorithms.
+    </p>
+
+    <h2>Custom reporting & automation</h2>
+    <p>
+      Create custom reports tailored to your team's needs. Automate report generation and distribution,
+      ensuring stakeholders always have access to the latest performance data.
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

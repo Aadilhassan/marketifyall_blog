@@ -1,7 +1,85 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Team';
+const description = 'Collaborate with roles, approvals, and workspaces that scale from startups to global orgs.';
+const permalink = '/features/team';
+const heroImage = '/assets/images/team.webp';
 ---
-<BaseLayout title="Team - Details">
-  <h1>Team</h1>
-  <p>More details about the Team feature will go here. Describe how users can collaborate and manage team members.</p>
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Team feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Roles & permissions</h2>
+    <p>Assign responsibilities clearly and keep approvals fast with lightweight, flexible workflows.</p>
+
+    <h2>Multi-brand support</h2>
+    <p>Manage multiple brands or regions in one account while keeping assets and data separate.</p>
+
+    <h2>Advanced workflow automation</h2>
+    <p>
+      Streamline team processes with customizable workflows and approval chains. Automate routine tasks,
+      reduce bottlenecks, and ensure consistent quality across all team outputs.
+    </p>
+
+    <h2>Collaboration tools & communication</h2>
+    <p>
+      Enhance team collaboration with built-in communication tools, project management features, and
+      real-time updates. Keep everyone aligned and productive with centralized collaboration hubs.
+    </p>
+
+    <h2>Performance tracking & analytics</h2>
+    <p>
+      Monitor team performance, track productivity metrics, and identify areas for improvement. Use
+      detailed analytics to optimize workflows and enhance team efficiency.
+    </p>
+
+    <h2>Client & stakeholder access</h2>
+    <p>
+      Provide secure access to clients and stakeholders with customizable dashboards and reporting.
+      Enable collaboration while maintaining data security and brand control.
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

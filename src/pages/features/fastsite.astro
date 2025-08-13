@@ -1,7 +1,85 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'FastSite';
+const description = 'Launch beautiful, optimized microsites in minutes with AI-assisted content and components.';
+const permalink = '/features/fastsite';
+const heroImage = '/assets/images/fastsite.webp';
 ---
-<BaseLayout title="FastSite - Details">
-  <h1>FastSite</h1>
-  <p>More details about the FastSite feature will go here. Explain how users can build and deploy AI-powered websites easily.</p>
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="FastSite feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Templates & blocks</h2>
+    <p>Assemble pages quickly with pre-built sections and instantly generate copy tailored to your goals.</p>
+
+    <h2>Performance built-in</h2>
+    <p>Automatic image optimization, caching, and SEO metadata help you rank and convert from day one.</p>
+
+    <h2>AI-powered content generation</h2>
+    <p>
+      Generate compelling copy, headlines, and meta descriptions with advanced AI. Our system adapts to your
+      brand voice and target audience, creating content that converts while maintaining authenticity.
+    </p>
+
+    <h2>Advanced customization & branding</h2>
+    <p>
+      Customize every aspect of your site with intuitive design tools. Maintain brand consistency across
+      all pages with centralized design systems and reusable components.
+    </p>
+
+    <h2>SEO optimization & analytics</h2>
+    <p>
+      Built-in SEO tools ensure your site ranks well from launch. Monitor performance with integrated
+      analytics, track conversions, and optimize continuously for better results.
+    </p>
+
+    <h2>Multi-language & localization</h2>
+    <p>
+      Reach global audiences with built-in multi-language support. Automatically translate content and
+      adapt your site for different regions and cultures.
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

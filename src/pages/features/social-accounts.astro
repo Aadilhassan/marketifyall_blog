@@ -1,7 +1,85 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Social Accounts';
+const description = 'Connect accounts securely, manage permissions, and publish across platforms from one place.';
+const permalink = '/features/social-accounts';
+const heroImage = '/assets/images/socialaccounts.webp';
 ---
-<BaseLayout title="Social Accounts - Details">
-  <h1>Social Accounts</h1>
-  <p>More details about the Social Accounts feature will go here. Explain how users can connect and manage their social media accounts.</p>
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Social Accounts illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Secure by design</h2>
+    <p>OAuth connections, granular roles, and audit logs keep your brand safe while enabling collaboration.</p>
+
+    <h2>Publish everywhere</h2>
+    <p>Post to all your channels at once while tailoring copy, media, and hashtags per platform automatically.</p>
+
+    <h2>Advanced account management & permissions</h2>
+    <p>
+      Manage multiple social accounts with granular permission controls. Assign different access levels to
+      team members and maintain security across all your social media platforms.
+    </p>
+
+    <h2>Content adaptation & optimization</h2>
+    <p>
+      Automatically adapt your content for each platform's unique requirements. Optimize images, adjust
+      character counts, and use platform-specific features to maximize engagement.
+    </p>
+
+    <h2>Social listening & monitoring</h2>
+    <p>
+      Monitor brand mentions, hashtags, and conversations across all platforms. Track industry trends,
+      competitor activity, and customer sentiment in real-time.
+    </p>
+
+    <h2>Advanced scheduling & automation</h2>
+    <p>
+      Schedule content across multiple platforms with intelligent timing optimization. Use AI-powered
+      insights to determine the best posting times for maximum engagement.
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

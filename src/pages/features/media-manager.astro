@@ -1,7 +1,85 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Media Manager';
+const description = 'Upload, tag, and organize brand assets with AI search and on-the-fly resizing for every channel.';
+const permalink = '/features/media-manager';
+const heroImage = '/assets/images/media.webp';
 ---
-<BaseLayout title="Media Manager - Details">
-  <h1>Media Manager</h1>
-  <p>More details about the Media Manager feature will go here. Describe how users can upload, organize, and edit media assets.</p>
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Media Manager illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Smart search</h2>
+    <p>Find assets instantly by color, subject, or copy text with AI-powered visual search and OCR.</p>
+
+    <h2>One-click variants</h2>
+    <p>Generate sizes and crops per platform automatically and keep your brand consistent.</p>
+
+    <h2>Advanced asset organization & tagging</h2>
+    <p>
+      Organize your media library with intelligent tagging, custom collections, and automated categorization.
+      Find any asset quickly with powerful search and filtering capabilities.
+    </p>
+
+    <h2>Brand asset management & compliance</h2>
+    <p>
+      Ensure brand consistency with centralized asset libraries, version control, and usage guidelines.
+      Track asset usage across campaigns and maintain brand compliance automatically.
+    </p>
+
+    <h2>Collaborative editing & approval</h2>
+    <p>
+      Enable team collaboration with built-in editing tools, approval workflows, and version control.
+      Streamline the creative process while maintaining quality and brand standards.
+    </p>
+
+    <h2>Performance optimization & CDN</h2>
+    <p>
+      Automatically optimize images for web and mobile with intelligent compression and format conversion.
+      Deliver assets quickly with global CDN distribution and smart caching.
+    </p>
+  </section>
 </BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>
