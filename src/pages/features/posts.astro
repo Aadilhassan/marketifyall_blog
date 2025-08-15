@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Posts';
+const description = 'Create, schedule, and manage social content across platforms with a unified calendar and powerful AI assistance.';
+const permalink = '/features/posts';
+const heroImage = '/assets/images/posts.webp';
+---
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Posts feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Plan once, post everywhere</h2>
+    <p>
+      Manage all of your content in one place. Draft posts, collaborate with your team, and schedule across
+      multiple social networks. Marketifyall adapts your message per platform automatically.
+    </p>
+
+    <h2>Smart scheduling</h2>
+    <p>
+      Pick optimal times based on audience activity. Our AI suggests ideal publish windows and can auto-fill your
+      calendar with engaging content sourced from your brand library.
+    </p>
+
+    <h2>Collaboration & approvals</h2>
+    <p>
+      Keep creators, managers, and stakeholders aligned with role-based access, comments, and approval flows.
+      Publish confidently knowing every post has been reviewed.
+    </p>
+
+    <h2>Content calendar & planning</h2>
+    <p>
+      Visualize your content strategy with drag-and-drop calendar views. Plan campaigns, holidays, and seasonal
+      content while maintaining consistent posting frequency across all platforms.
+    </p>
+
+    <h2>AI-powered content suggestions</h2>
+    <p>
+      Generate engaging captions, hashtags, and content ideas with AI assistance. Our system learns from your
+      best-performing content to suggest similar approaches that resonate with your audience.
+    </p>
+
+    <h2>Cross-platform optimization</h2>
+    <p>
+      Automatically adapt your content for each platform's unique requirements. Optimize images, adjust
+      character counts, and use platform-specific features to maximize engagement and reach.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature-hero {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .feature-hero h1 {
+    margin: 0.5rem 0 0.25rem;
+  }
+
+  .feature-hero .lead {
+    color: var(--text-secondary);
+    font-family: var(--font-family-sans);
+    font-weight: 500;
+    max-width: 56ch;
+    margin: 0 auto 0.75rem;
+  }
+
+  .feature-hero .hero-image {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: none;
+    background: transparent;
+  }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) {
+    .feature-hero .hero-image { max-width: 320px; }
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

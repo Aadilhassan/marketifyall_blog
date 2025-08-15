@@ -4,9 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'Marketifyall - Social Media Automation Platform';
 const description = 'AI-powered social media automation platform for startups to manage their entire marketing ecosystem.';
 const permalink = Astro.site.href;
+
 ---
 
+
 <BaseLayout title={title} description={description} permalink={permalink}>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  
+  
   <div class="home-container">
     <div class="home-copy">
       <h1>Automate Your Marketing with AI</h1>
@@ -30,9 +37,268 @@ const permalink = Astro.site.href;
       </p>
     </div>
   </div>
+  <div class="feature-card">
+  </div>
+  
+  
+  <section class="bg-gradient-to-br from-gray-50 via-gray-100 to-white py-16 px-4">
+    {/* Feature Highlight row */}
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/overview.webp"
+          alt="Overview icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Overview</h3>
+        <p class="overview-desc">Marketifyall Dashboard gives you a clear and powerful overview of your marketing workspace — track posts, manage campaigns, collaborate with your team, and take action instantly, all in one place.</p>
+        <!-- <a class="learn-more-link" href="#">Read More &#10132;</a> -->
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/posts.webp"
+          alt="Posts icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Posts</h3>
+        <p class="overview-desc">The Posts section helps you easily create, schedule, and manage your social content. With a user-friendly layout and a quick “Create Post” button, staying organized and consistent has never been easier.
+
+
+        </p>
+        <a class="learn-more-link" href="/features/posts">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/fastsite.webp"
+          alt="FastSite icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">FastSite</h3>
+        <p class="overview-desc">Build stunning, responsive websites in minutes using AI — preview live, customize easily, and export clean code without writing any yourself.
+
+
+        </p>
+        <a class="learn-more-link" href="/features/fastsite">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/media.webp"
+          alt="Media Manager icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Media Manager</h3>
+        <p class="overview-desc">Media Manager is your central hub to upload, organize, and design media for your social content. Easily upload images and videos, create stunning graphics with the built-in editor, or browse thousands of free stock photos via Pexels — all in one place. Simplify your creative workflow without leaving the platform.
+
+        </p>
+        <a class="learn-more-link" href="/features/media-manager">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/Campaigns.webp"
+          alt="Campaigns icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Campaigns</h3>
+        <p class="overview-desc">The Campaigns section is designed to help you create and manage targeted marketing campaigns in one place. While core features are coming in Phase 2, this section will eventually allow you to organize content by campaigns, monitor performance, and run smarter, goal-focused strategies for your brand.
+
+        </p>
+        <a class="learn-more-link" href="/features/campaigns">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/leads.webp"
+          alt="Leads icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Leads</h3>
+        <p class="overview-desc">Leads helps you capture, track, and manage potential customers who engage with your content or forms. Easily view who has shown interest, monitor interactions, and convert them into loyal users — all from one centralized dashboard.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/leads">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/emailcampaigns.webp"
+          alt="Email Campaigns icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Email Campaigns</h3>
+        <p class="overview-desc">Email Campaigns lets you create, schedule, and manage promotional or informational emails directly from your dashboard. Whether it’s newsletters, offers, or product updates — reach your audience with beautifully designed campaigns that drive engagement.
+
+        </p>
+        <a class="learn-more-link" href="/features/email-campaigns">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/socialaccounts.webp"
+          alt="Social Accounts icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Social Accounts</h3>
+        <p class="overview-desc">Social Accounts allows you to connect all your platforms — like Instagram, Facebook, X (Twitter), and more — in one place. Manage integrations, schedule posts, and track performance seamlessly across your social media presence.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/social-accounts">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/team.webp"
+          alt="Team icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Team</h3>
+        <p class="overview-desc">The Team section enables smooth collaboration by letting you invite and manage team members. Assign roles, track activity, and work together on posts, campaigns, and content — all in a secure and organized space.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/team">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/engagement.webp"
+          alt="Engagement icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Engagement</h3>
+        <p class="overview-desc">Engagement gives you insight into how your audience interacts with your content. Track likes, comments, shares, and other engagement metrics to understand what resonates best and improve your content strategy.
+
+        </p>
+        <a class="learn-more-link" href="/features/engagement">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/analytics.webp"
+          alt="Analytics icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Analytics</h3>
+        <p class="overview-desc">Analytics provides you with powerful insights into your marketing performance. Visualize metrics like impressions, reach, clicks, and growth trends — all in real time so you can make data-driven decisions and improve results.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/analytics">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/ranktracking.webp"
+          alt="Rank Tracking icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Rank Tracking</h3>
+        <p class="overview-desc">Rank Tracking helps you monitor how your brand or content ranks across search engines and social platforms. Keep track of keyword performance, visibility trends, and search traffic to boost your SEO and digital presence.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/rank-tracking">Read More &#10132;</a>
+      </div>
+    </div>
+    
+    <div class="overview-hero max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div class="overview-hero-img flex-shrink-0">
+        <img
+          src="/assets/images/siteanalysis.webp"
+          alt="Site Analysis icon"
+          class="feature-img"
+        />
+      </div>
+      <div class="overview-hero-text flex-1">
+        <h3 class="overview-title">Site Analysis</h3>
+        <p class="overview-desc"> Site Analysis gives you a detailed look at your FastSite or linked website’s performance. Monitor traffic, user behavior, load speed, and SEO insights — helping you optimize your site for better results and user experience.
+
+  
+        </p>
+        <a class="learn-more-link" href="/features/site-analysis">Read More &#10132;</a>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
 </BaseLayout>
 
 <style>
+  .object-contain {
+    object-fit: contain;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    display: block;
+    border-radius: 1.25rem;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+  
+  
+  /* Place in your CSS or <style> tag */
+    .responsive-img {
+  width: 100%;
+  max-width: 400px; /* or whatever fits your design */
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+}
+
+
   .home-container {
     align-items: center;
     display: flex;
@@ -140,8 +406,9 @@ const permalink = Astro.site.href;
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 100%) {
     .cta-buttons {
+      
       flex-direction: column;
       align-items: stretch;
     }
@@ -149,71 +416,281 @@ const permalink = Astro.site.href;
 </style>
 
 <style>
-  .home-container {
+  html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure all elements respect container size */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* ===== Layout Container ===== */
+.layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ===== Blog Content Styling ===== */
+.blog-container {
+  flex: 1;
+  max-width: 100%;
+}
+
+/* ===== Navbar/Header ===== */
+header, nav {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Toggle Menu Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
     align-items: center;
+    padding: 1rem;
+  }
+
+  nav ul {
+    display: none; /* hidden by default */
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: var(--background-body, #fff);
+  }
+
+  nav ul.active {
+    display: flex; /* show when toggle is active */
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .blog-container {
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .layout {
+    padding: 0.5rem;
+  }
+
+  .blog-container {
+    padding: 0;
+  }
+}
+.overview-hero {
+  min-height: 350px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* Remove card look */
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  transition: none;
+}
+/* Remove hover effect */
+/* .overview-hero:hover {
+  transform: none;
+  box-shadow: none;
+} */
+.overview-hero-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+}
+.overview-hero-img::before {
+  content: none;
+}
+.feature-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  /* Remove card look from image */
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  object-fit: contain;
+  display: block;
+  border: none;
+}
+.overview-hero:hover .feature-img {
+  transform: none;
+  box-shadow: none;
+}
+.overview-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+  width: 100%;
+  height: 100%;
+}
+.overview-title {
+  font-family: 'Merriweather', serif;
+  font-weight: 900;
+  color: #393939;
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+  line-height: 1.1;
+  position: relative;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+}
+.overview-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #4361EE 0%, #4361EE 100%);
+  border-radius: 2px;
+}
+.overview-desc {
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  color: #393939;
+  font-size: 1.5rem;
+  text-align: left;
+  max-width: 32rem;
+  line-height: 1.6;
+  background: none;
+}
+@media (min-width: 768px) {
+  .overview-hero {
+    flex-direction: row !important;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 3rem 4rem 3rem;
+  }
+  .overview-hero-img {
+    margin-right: 3rem;
+    max-width: 420px;
+    flex-shrink: 0;
+  }
+  .overview-hero-text {
+    padding-left: 25rem;
+    align-items: flex-start;
+    text-align: center;
+    height: 100%;
+    flex: 1;
+  }
+  /* Alternate layout for even-numbered sections */
+  .overview-hero:nth-child(even) {
+    flex-direction: row-reverse !important;
+  }
+  .overview-hero:nth-child(even) .overview-hero-img {
+    margin-right: 0;
+    margin-left: 3rem;
+  }
+  .overview-hero:nth-child(even) .overview-hero-text {
+    padding-left: 0;
+    padding-right: 3rem;
+  }
+}
+@media (max-width: 767px) {
+  .overview-hero {
     display: flex;
-    flex: 1;
-    justify-content: center;
-    margin: 2em 0;
-    min-height: 400px;
-  }
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;  
 
-  .home-copy {
-    flex: 1;
-    padding: 0 1em;
+    flex-direction: column !important;
+    text-align: center;
+    padding: 2rem 1.5rem;
   }
-
-  .home-copy h1 {
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    line-height: 1.3;
+  .overview-hero-img {
+    margin-right: 0;
+    margin-bottom: 2rem;
+    max-width: 100%;
   }
-
-  .home-copy p {
-    font-size: 1.4em;
+  .overview-hero-text {
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+    height: auto;
   }
-
-  .hero-image-container {
-    margin: 0 1em;
+  .overview-title, .overview-desc {
     text-align: center;
   }
-
-  .hero-image-container picture {
-    display: block;
-    min-height: 250px;
+  .overview-title::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
-
-  .caption {
-    font-size: .8em;
-    font-style: italic;
-    text-align: left;
-  }
-
-  .hero-image {
-    width: 100%;
-    max-width: 550px;
-    margin-bottom: 1em;
-  }
-
-  @media (max-width: 1200px) {
-    p {
-      font-size: 1.2em;
-    }
-
-    .hero-image {
-      max-width: 400px;
-    }
-  }
-
-  @media (max-width: 800px) {
-    .home-container {
-      flex-direction: column;
-    }
-
-    .home-copy {
-      flex: 0;
-      padding-bottom: 2em;
-      text-align: center;
-    }
-  }
+  
+  
+}
 </style>
+
+<style>
+.feature-img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  background: white;
+  object-fit: contain;
+  display: block;
+}
+
+.learn-more-link {
+  display: inline-block;
+  margin-top: 1.2rem;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #1a237e;
+  text-decoration: none;
+  font-size: 1.15rem;
+  transition: color 0.2s;
+}
+.learn-more-link:hover {
+  color: #4361EE;
+  text-decoration: none;
+}
+
+
+
+
+</style>
+
+
+
+

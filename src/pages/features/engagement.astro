@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Engagement';
+const description = 'Monitor comments and messages in one inbox, respond faster, and boost community health.';
+const permalink = '/features/engagement';
+const heroImage = '/assets/images/engagement.webp';
+---
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Engagement feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Unified inbox</h2>
+    <p>Reply to comments and messages from every platform in one place, with AI-suggested responses.</p>
+
+    <h2>Moderation tools</h2>
+    <p>Automatically flag spam and prioritize important conversations for your team.</p>
+
+    <h2>AI-powered response suggestions</h2>
+    <p>
+      Get intelligent response suggestions based on context and brand voice. Our AI learns from your team's
+      responses to provide increasingly accurate and helpful suggestions that save time and maintain consistency.
+    </p>
+
+    <h2>Advanced sentiment analysis</h2>
+    <p>
+      Monitor brand sentiment in real-time with advanced AI analysis. Identify potential crises early,
+      track customer satisfaction trends, and respond proactively to maintain positive brand perception.
+    </p>
+
+    <h2>Team collaboration & workflow</h2>
+    <p>
+      Streamline team collaboration with assignment tools, internal notes, and approval workflows. Ensure
+      every customer interaction is handled efficiently and consistently across your entire team.
+    </p>
+
+    <h2>Performance metrics & insights</h2>
+    <p>
+      Track response times, resolution rates, and customer satisfaction scores. Use detailed analytics to
+      optimize your engagement strategy and improve team performance.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

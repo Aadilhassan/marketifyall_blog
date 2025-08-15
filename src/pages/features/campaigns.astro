@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Campaigns';
+const description = 'Plan launches and seasonal pushes with grouped content, shared budgets, and roll-up reporting.';
+const permalink = '/features/campaigns';
+const heroImage = '/assets/images/Campaigns.webp';
+---
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Campaigns feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Organize everything</h2>
+    <p>Group posts, assets, and spend into one place. Track performance at the campaign level or drill down by post.</p>
+
+    <h2>Compare and iterate</h2>
+    <p>Benchmark campaigns against each other to learn what resonates and optimize your next launch.</p>
+
+    <h2>Campaign templates & automation</h2>
+    <p>
+      Save successful campaign structures as reusable templates. Automate seasonal campaigns, product launches,
+      and promotional events with pre-built workflows that scale.
+    </p>
+
+    <h2>Budget management & ROI tracking</h2>
+    <p>
+      Set campaign budgets and track spend across all channels. Monitor ROI in real-time with automated
+      reporting and alerts when campaigns exceed performance thresholds.
+    </p>
+
+    <h2>Cross-channel coordination</h2>
+    <p>
+      Coordinate messaging across email, social, ads, and content marketing. Ensure brand consistency while
+      optimizing each channel for maximum impact and audience engagement.
+    </p>
+
+    <h2>Advanced targeting & segmentation</h2>
+    <p>
+      Target specific audience segments with personalized campaign variations. Use AI-powered insights to
+      identify high-value prospects and optimize campaign performance.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

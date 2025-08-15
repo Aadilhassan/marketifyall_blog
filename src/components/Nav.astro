@@ -1,74 +1,184 @@
 ---
-import ThemeToggleButton from './ThemeToggleButton.svelte';
-const { current = '' } = Astro.props;
+// NavMenu.astro
+import ToggleMenu from "./ToggleMenu.astro";
+import ThemeToggleButton from "./ThemeToggleButton.svelte";
+const { current = "" } = Astro.props;
 ---
 
 <style>
+  :root {
+    --menu-bg: var(--background-body);
+    --menu-text: var(--text-main);
+    --overlay-color: rgba(0, 0, 0, 0.25);
+  }
+
   nav {
     align-items: center;
     display: flex;
     flex: 1;
-    font-family: var(--font-family-sans);
-    font-weight: 700;
     justify-content: flex-end;
-    text-transform: uppercase;
+    gap: 12px;
   }
 
   a {
-    color: inherit;
     text-decoration: none;
-    padding: 10px 5px;
-    display: block;
-    position: relative;
     margin-left: 20px;
     min-width: 70px;
     text-align: center;
+    color: inherit;
   }
 
-  a:not(.selected) {
-    opacity: 0.7;
+  a.selected {
+    color: var(--primary-color);
   }
 
-  a::before {
-    content: '';
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    backdrop-filter: blur(2px);
+    z-index: 900;
+  }
+
+  .menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin-right: 0.5em;
+    color: currentColor;
+    z-index: 1100;
+    position: relative;
+  }
+
+  .menu-toggle:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  .menu-toggle .bar {
     position: absolute;
-    transition: transform .3s ease;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    left: 8px;
+    width: 24px;
     height: 2px;
-    background: var(--text-secondary);
-    transform: scaleX(0);
+    background: currentColor;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.25s ease, top 0.25s ease, opacity 0.2s ease;
   }
 
-  a:hover::before,
-  .selected::before {
-    transform: scaleX(1);
+  .menu-toggle .bar:nth-child(1) { top: 12px; }
+  .menu-toggle .bar:nth-child(2) { top: 19px; }
+  .menu-toggle .bar:nth-child(3) { top: 26px; }
+
+  .menu-toggle.open .bar:nth-child(1) {
+    top: 19px;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.open .bar:nth-child(3) {
+    top: 19px;
+    transform: rotate(-45deg);
   }
 
-  .selected::before {
-    background: var(--primary-color);
-  }
-
-  .theme-toggle-container {
-    width: 75px;
-  }
-
-  @media screen and (max-width: 520px) {
-    .theme-toggle-container {
-      margin-right: 1em;
+  @media (min-width: 769px) {
+    .menu-toggle { display: none; }
+    .menu-overlay { display: none; }
+    nav {
+      position: static;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      background: transparent;
+      color: inherit;
     }
   }
 
+  @media (max-width: 768px) {
+    nav {
+      position: fixed;
+      top: 64px;
+      left: 50%;
+      transform: translate(-50%, -12px);
+      width: calc(100% - 32px);
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--menu-bg);
+      color: var(--menu-text);
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.28s ease, opacity 0.28s ease,
+        background-color 0.3s ease, color 0.3s ease;
+      z-index: 1000;
+      max-height: 70vh;
+      overflow: auto;
+    }
+
+    nav.active {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a { margin: 8px 0; font-size: 1.05rem; }
+  }
 </style>
 
-<nav>
-  <a class={current === "" ? "selected" : ""} href='/'>home</a>
-  <a class={current === "about" ? "selected" : ""} href='/about'>about</a>
-  <a class={current === "blog" ? "selected" : ""} href='/blog'>blog</a>
-  <a class={current === "features" ? "selected" : ""} href='/features'>features</a>
-  <a class={current === "docs" ? "selected" : ""} href='/docs'>docs</a>
+<!-- Toggle Button -->
+<button
+  class="menu-toggle"
+  id="menu-toggle"
+  aria-expanded="false"
+  aria-controls="nav-menu"
+  aria-label="Open menu"
+>
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<!-- Screen Overlay -->
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<!-- Nav Menu -->
+<nav id="nav-menu" role="navigation" aria-label="Primary">
+  <a class={current === "" ? "selected" : ""} href="/">home</a>
+  <a class={current === "about" ? "selected" : ""} href="/about">about</a>
+  <a class={current === "blog" ? "selected" : ""} href="/blog">blog</a>
+  <a class={current === "features" ? "selected" : ""} href="/features"
+    >features</a
+  >
+  <a class={current === "docs" ? "selected" : ""} href="/docs">docs</a>
   <div class="theme-toggle-container">
     <ThemeToggleButton client:load />
+    <ToggleMenu client:load />
   </div>
 </nav>
+
+<!-- Script handled by ToggleMenu.astro -->

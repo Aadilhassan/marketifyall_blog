@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Email Campaigns';
+const description = 'Design, personalize, and automate emails with AI-assisted content and detailed deliverability insights.';
+const permalink = '/features/email-campaigns';
+const heroImage = '/assets/images/emailcampaigns.webp';
+---
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Email Campaigns illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Beautiful templates</h2>
+    <p>Start from tested layouts and customize with drag-and-drop blocks that stay on brand.</p>
+
+    <h2>Automation journeys</h2>
+    <p>Trigger drip sequences and event-based flows to engage subscribers at the perfect moment.</p>
+
+    <h2>Advanced personalization & segmentation</h2>
+    <p>
+      Deliver highly personalized content based on subscriber behavior, preferences, and demographics. Use
+      dynamic content blocks and smart segmentation to increase engagement and conversion rates.
+    </p>
+
+    <h2>AI-powered content optimization</h2>
+    <p>
+      Leverage artificial intelligence to optimize subject lines, send times, and content. Our AI analyzes
+      performance patterns to continuously improve your email campaigns and maximize deliverability.
+    </p>
+
+    <h2>Comprehensive deliverability tools</h2>
+    <p>
+      Ensure your emails reach the inbox with advanced deliverability features. Monitor sender reputation,
+      test emails across different clients, and get detailed insights into delivery performance.
+    </p>
+
+    <h2>Advanced automation & workflows</h2>
+    <p>
+      Build complex email workflows with conditional logic, A/B testing, and behavioral triggers. Automate
+      customer onboarding, re-engagement campaigns, and lifecycle marketing with sophisticated automation tools.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>

@@ -1,16 +1,25 @@
 <style>
-  img {
+  .logo-desktop {
     display: block;
-    width: 75px;
+    width: 90px;
+    height: auto;
   }
 
-  @media screen and (max-width: 520px) {
-    img {
-      display: none;
-    }
+  .logo-mobile {
+    display: none;
+    width: 64px;
+    height: auto;
+  }
+
+  /* Match mobile breakpoint with Nav */
+  @media (max-width: 768px) {
+    .logo-desktop { display: none; }
+    .logo-mobile { display: block; }
   }
 </style>
 
-<a href="/">
-  <img alt="Marketifyall Logo" src="/assets/logo.webp" width="75" height="50" />
+<a href="/" aria-label="Marketifyall home">
+  <img class="logo-desktop" alt="Marketifyall" src="/assets/logo.webp" width="90" height="60" />
+  <img class="logo-mobile" alt="Marketifyall" src="/assets/logo.webp" width="64" height="64" />
+  
 </a>

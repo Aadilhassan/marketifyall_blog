@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Leads';
+const description = 'Capture, score, and route leads from every campaign to your CRM with zero manual busywork.';
+const permalink = '/features/leads';
+const heroImage = '/assets/images/leads.webp';
+---
+
+<BaseLayout 
+  title={`${title} — Marketifyall`}
+  description={description}
+  permalink={permalink}
+  current="features"
+  image={heroImage}
+>
+  <header class="feature-hero">
+    <img src={heroImage} alt="Leads feature illustration" class="hero-image" loading="eager" />
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+    <hr />
+  </header>
+
+  <section class="container content">
+    <h2>Automatic capture</h2>
+    <p>Forms, ads, and chat all feed into one pipeline with duplication control and consent tracking.</p>
+
+    <h2>Scoring that adapts</h2>
+    <p>Score by engagement and fit so your sales team focuses on the most promising opportunities.</p>
+
+    <h2>Advanced lead nurturing & automation</h2>
+    <p>
+      Automatically nurture leads through personalized email sequences, targeted content, and behavioral
+      triggers. Move prospects through your funnel efficiently with intelligent automation workflows.
+    </p>
+
+    <h2>CRM integration & synchronization</h2>
+    <p>
+      Seamlessly sync leads with your existing CRM systems. Automatically create contacts, update records,
+      and track interactions across all your marketing and sales tools.
+    </p>
+
+    <h2>Lead qualification & routing</h2>
+    <p>
+      Automatically qualify leads based on behavior, demographics, and engagement patterns. Route qualified
+      prospects to the right sales team members for faster conversion.
+    </p>
+
+    <h2>Comprehensive lead analytics</h2>
+    <p>
+      Track lead sources, conversion rates, and ROI across all channels. Use detailed analytics to optimize
+      your lead generation strategy and improve conversion performance.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature-hero { text-align: center; margin-top: 1rem; }
+  .feature-hero h1 { margin: 0.5rem 0 0.25rem; }
+  .feature-hero .lead { color: var(--text-secondary); font-family: var(--font-family-sans); font-weight: 500; max-width: 56ch; margin: 0 auto 0.75rem; }
+  .feature-hero .hero-image { width: 100%; max-width: 560px; height: auto; display: block; margin: 1rem auto; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: none; background: transparent; }
+
+  /* Full-bleed banner variant */
+  .feature-hero.banner .hero-image {
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    border-radius: 0;
+    border: none;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .feature-hero hr { min-width: 100px; width: 30%; }
+  @media (max-width: 768px) { 
+    .feature-hero .hero-image { max-width: 320px; } 
+    .feature-hero.banner .hero-image {
+      height: 200px;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+</style>
